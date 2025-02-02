@@ -244,9 +244,20 @@ const phoneData = [
   },
 ];
 
-
 router.get("/phone", (req, res) => {
   res.send(phoneData);
+});
+
+//Single product paramater
+
+router.get("/phone/:id", (req, res) => {
+  const phoneId = parseInt(req.params.id);
+  const singlePhone=phoneData.find((item)=>item._id === phoneId)
+
+  if (!phoneId) {
+    return res.status(404).json({message:'Single Phone data was not found'})
+  }
+  res.json(singlePhone)
 });
 
 module.exports = router;
